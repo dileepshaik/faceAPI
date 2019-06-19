@@ -1,0 +1,48 @@
+# import modules
+import request
+
+# Request headers set Subscription key which provides access to this API. Found in your Cognitive Services accounts.
+headers = {
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': 'XXXad1b1f6564XXXXed71a61f7XXXb44',
+}
+
+body = dict()
+body["url"] = "http://www.imagozone.com/var/albums/vedete/Matthew%20Perry/Matthew%20Perry.jpg?m=1355670659"
+body = str(body)
+
+# Request URL 
+FaceApiDetect = 'https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceAttributes=age,gender,headPose,smile,facialHair' 
+
+try:
+    # REST Call 
+    response = requests.post(FaceApiDetect, data=body, headers=headers) 
+    print("RESPONSE:" + str(response.json()))
+
+except Exception as e:
+    print(e)
+    
+    [{
+	'faceId': '2bed5571-71e8-4930-9fae-b2ba46db077d',
+	'faceRectangle': {
+		'top': 335,
+		'left': 249,
+		'width': 319,
+		'height': 319
+	},
+	'faceAttributes': {
+		'smile': 1.0,
+		'headPose': {
+			'pitch': 0.0,
+			'roll': -3.7,
+			'yaw': -2.6
+		},
+		'gender': 'male',
+		'age': 43.0,
+		'facialHair': {
+			'moustache': 0.1,
+			'beard': 0.1,
+			'sideburns': 0.1
+		}
+	}
+}]
